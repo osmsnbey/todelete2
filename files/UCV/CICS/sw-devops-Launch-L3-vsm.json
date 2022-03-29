@@ -1,0 +1,245 @@
+{
+  "_id": "5fc660430f62f8ad9b8a6527",
+  "pipelineId": "9a211094-b9fe-4314-827f-65fe12f7bb4c",
+  "tenantId": "5ade13625558f2c6688d15ce",
+  "description": "Support",
+  "query": "",
+  "phases": [
+    {
+      "name": "Jira Issues from Salesforce Cases",
+      "description": null,
+      "stages": [
+        {
+          "name": "Issue has something in it",
+          "query": "issue.rawIssue.fields.customfield_12101.count > 0",
+          "description": null,
+          "targets": [
+            "Open Pull Requests"
+          ],
+          "wipLimit": null,
+          "gates": null
+        }
+      ]
+    },
+    {
+      "name": "Code Review",
+      "description": null,
+      "stages": [
+        {
+          "name": "Open Pull Requests",
+          "query": "pr.status=OPEN and (pr.creator='TedK' or pr.creator='santhiya-kandasamy' or pr.creator='meshram-a' or pr.creator='ankit-ra' or pr.creator='donald-dzmelyk' or pr.creator='prashanth-hiremathbs')",
+          "description": null,
+          "targets": [
+            "PAST SLA"
+          ],
+          "wipLimit": null,
+          "gates": null
+        }
+      ]
+    },
+    {
+      "name": "L3 Last Updated",
+      "description": null,
+      "stages": [
+        {
+          "name": "PAST SLA",
+          "query": "(issue.labels=\"UrbanCode Deploy\") and (((issue.lastUpdate>=1d and issue.priority='1 - Critical business impact (production or service is down)') or (issue.lastUpdate>=3d and issue.priority='2 - Significant impact (any system is down)') or (issue.lastUpdate>=4d and issue.priority='3 - Minor business impact') or (issue.lastUpdate>=5d and issue.priority='4 - Minimal impact (how-to questions, minor problems)')) and (issue.status='SME is Working' or issue.status='SME Needed' or issue.status='SME is Needed' or issue.status='Waiting for Development' or issue.status='Waiting on IBM software update'))",
+          "description": null,
+          "targets": [
+            "L3 has 1 Day to Respond"
+          ],
+          "wipLimit": null,
+          "gates": null
+        },
+        {
+          "name": "L3 has 1 Day to Respond",
+          "query": "(issue.labels=\"UrbanCode Deploy\") and ((((issue.lastUpdate<=1d and issue.lastUpdate>=0d) and issue.priority='1 - Critical business impact (production or service is down)') or ((issue.lastUpdate<=3d and issue.lastUpdate>=2d) and issue.priority='2 - Significant impact (any system is down)') or ((issue.lastUpdate<=4d and issue.lastUpdate>=3d) and issue.priority='3 - Minor business impact') or ((issue.lastUpdate<=5d and issue.lastUpdate>=4d) and issue.priority='4 - Minimal impact (how-to questions, minor problems)')) and (issue.status='SME is Working' or issue.status='SME Needed' or issue.status='SME is Needed' or issue.status='Waiting for Development' or issue.status='Waiting on IBM software update'))",
+          "description": null,
+          "targets": [
+            "L3 has 2 Days to Respond"
+          ],
+          "wipLimit": null,
+          "gates": null
+        },
+        {
+          "name": "L3 has 2 Days to Respond",
+          "query": "(issue.labels=\"UrbanCode Deploy\") and ((((issue.lastUpdate<=2d and issue.lastUpdate>=1d) and issue.priority='2 - Significant impact (any system is down)') or ((issue.lastUpdate<=3d and issue.lastUpdate>=2d) and issue.priority='3 - Minor business impact') or ((issue.lastUpdate<=4d and issue.lastUpdate>=3d) and issue.priority='4 - Minimal impact (how-to questions, minor problems)')) and (issue.status='SME is Working' or issue.status='SME Needed' or issue.status='SME is Needed' or issue.status='Waiting for Development' or issue.status='Waiting on IBM software update'))",
+          "description": null,
+          "targets": [
+            "L3 has 3 Days to Respond"
+          ],
+          "wipLimit": null,
+          "gates": null
+        },
+        {
+          "name": "L3 has 3 Days to Respond",
+          "query": "(issue.labels=\"UrbanCode Deploy\") and ((((issue.lastUpdate<=1d and issue.lastUpdate>=0d) and issue.priority='2 - Significant impact (any system is down)') or ((issue.lastUpdate<=2d and issue.lastUpdate>=1d) and issue.priority='3 - Minor business impact') or ((issue.lastUpdate<=3d and issue.lastUpdate>=2d) and issue.priority='4 - Minimal impact (how-to questions, minor problems)')) and (issue.status='SME is Working' or issue.status='SME Needed' or issue.status='SME is Needed' or issue.status='Waiting for Development' or issue.status='Waiting on IBM software update'))",
+          "description": null,
+          "targets": [
+            "L3 has 4 Days to Respond"
+          ],
+          "wipLimit": null,
+          "gates": null
+        },
+        {
+          "name": "L3 has 4 Days to Respond",
+          "query": "(issue.labels=\"UrbanCode Deploy\") and ((((issue.lastUpdate<=1d and issue.lastUpdate>=0d) and issue.priority='3 - Minor business impact') or ((issue.lastUpdate<=2d and issue.lastUpdate>=1d) and issue.priority='4 - Minimal impact (how-to questions, minor problems)')) and (issue.status='SME is Working' or issue.status='SME Needed' or issue.status='SME is Needed' or issue.status='Waiting for Development' or issue.status='Waiting on IBM software update'))",
+          "description": null,
+          "targets": [
+            "L3 has 5 Days to Respond"
+          ],
+          "wipLimit": null,
+          "gates": null
+        },
+        {
+          "name": "L3 has 5 Days to Respond",
+          "query": "(issue.labels=\"UrbanCode Deploy\") and ((((issue.lastUpdate<=1d and issue.lastUpdate>=0d) and issue.priority='4 - Minimal impact (how-to questions, minor problems)')) and (issue.status='SME is Working' or issue.status='SME Needed' or issue.status='SME is Needed' or issue.status='Waiting for Development' or issue.status='Waiting on IBM software update'))",
+          "description": null,
+          "targets": [
+            "Within 7 days"
+          ],
+          "wipLimit": null,
+          "gates": null
+        }
+      ]
+    },
+    {
+      "name": "L2 Last Updated",
+      "description": null,
+      "stages": [
+        {
+          "name": "Within 7 days",
+          "query": "((issue.lastUpdate<7d) and (issue.status='IBM is working' or issue.status='Waiting for IBM' or issue.status='Waiting for Support' or issue.status='SME Work Complete' or issue.status='Resolution Provided'))",
+          "description": null,
+          "targets": [
+            "7-14 days"
+          ],
+          "wipLimit": null,
+          "gates": null
+        },
+        {
+          "name": "7-14 days",
+          "query": "((issue.lastUpdate>7d and issue.lastUpdate<14d) and (issue.status='IBM is working' or issue.status='Waiting for IBM' or issue.status='Waiting for Support' or issue.status='SME Work Complete' or issue.status='Resolution Provided'))",
+          "description": null,
+          "targets": [
+            "More than 14 days"
+          ],
+          "wipLimit": null,
+          "gates": null
+        },
+        {
+          "name": "More than 14 days",
+          "query": "((issue.lastUpdate>14d) and (issue.status='IBM is working' or issue.status='Waiting for IBM' or issue.status='Waiting for Support' or issue.status='SME Work Complete' or issue.status='Resolution Provided'))",
+          "description": null,
+          "targets": [],
+          "wipLimit": null,
+          "gates": null
+        }
+      ]
+    }
+  ],
+  "leadTime": {
+    "start": "PAST SLA",
+    "end": "L3 has 5 Days to Respond"
+  },
+  "cycleTime": {
+    "start": "Within 7 days",
+    "end": "More than 14 days"
+  },
+  "mappings": {
+    "priority": {
+      "Lowest": [
+        ""
+      ],
+      "Low": [
+        "4 - Minimal impact (how-to questions, minor problems)"
+      ],
+      "Medium": [
+        "3 - Minor business impact"
+      ],
+      "High": [
+        "2 - Significant impact (any system is down)"
+      ],
+      "Highest": [
+        "1 - Critical business impact (production or service is down)"
+      ]
+    }
+  },
+  "integrations": [
+    {
+      "_id": "5fbd37666d6bb3833d43ea5c",
+      "type": "ucv-ext-salesforce",
+      "tenant_id": "5ade13625558f2c6688d15ce",
+      "name": "sw-devops-UrbanCodeL3-SALESFORCE",
+      "disabled": true,
+      "properties": {
+        "ucvAccessKey": "e9b2c337-15a7-482c-9b50-33742e0fce6c",
+        "ClientId": null,
+        "ClientSecret": null,
+        "username": "sujan.s@hcl.com",
+        "password": null,
+        "accessToken": "638354b9e6f770a3d087fb7ce053c6b87f65cd327efc2b43dbb628157bd802df9649937b61f5afff7285cb541ff5b4cd5a147336f5f78e50e26611a728a9b713002f298b767fb16e19e51dec6f30fb202f01eb28236a65696fcd0efa0570d8959c6c1364ed7ffa04492ff6602a1ce2bfcad4c6f2f877e042328bc40cc37040b0",
+        "salesforceurl": "https://ibmsf.my.salesforce.com",
+        "reportName": "UrbanCodeL3"
+      },
+      "image": null
+    },
+    {
+      "_id": "5cd59a31632543a531f3f4dd",
+      "type": "ucv-ext-github",
+      "tenant_id": "5ade13625558f2c6688d15ce",
+      "name": "sw-devops-Launch-GITHUB",
+      "disabled": false,
+      "properties": {
+        "ucvAccessKey": "****",
+        "repositories": [
+          "ucd-server",
+          "common-air-agent",
+          "common-air-devilfish",
+          "common-air-agent-relay",
+          "aws-diy-ui",
+          "aws-diy-api"
+        ],
+        "owner": "urbancode",
+        "apiUrl": "https://github01.hclpnp.com/api/v3",
+        "token": "****"
+      },
+      "image": "hclcr.io/accelerate/ucv-ext-github:1.0.42"
+    },
+    {
+      "_id": "5cd59a316325435fb9f3f4dc",
+      "type": "ucv-ext-jira",
+      "tenant_id": "5ade13625558f2c6688d15ce",
+      "name": "sw-devops-Launch-JIRA",
+      "disabled": false,
+      "properties": {
+        "baseUrl": "https://jira01.hclpnp.com",
+        "username": "urbancodedots@hcl.com",
+        "password": "****",
+        "jiraProjects": [
+          "AWSDIY",
+          "DEPLOY"
+        ]
+      },
+      "image": "hclcr.io/accelerate/ucv-ext-jira:1.0.50"
+    }
+  ],
+  "linkRules": [
+    {
+      "fromIntegrationName": "sw-devops-Launch-GITHUB",
+      "toIntegrationName": "sw-devops-UrbanCodeL3-SALESFORCE",
+      "fromField": "pr.name",
+      "toField": "issue.id",
+      "pattern": "(TS[0-9]+)"
+    },
+    {
+      "fromIntegrationName": "sw-devops-Launch-GITHUB",
+      "toIntegrationName": "sw-devops-Launch-JIRA",
+      "fromField": "pr.name",
+      "toField": "issue.name",
+      "pattern": "(TS[0-9]+)"
+    }
+  ],
+  "metrics": null,
+  "metricsBar": []
+}
