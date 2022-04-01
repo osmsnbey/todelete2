@@ -1,0 +1,17 @@
+
+Team Foundation Server Plugin Files Download
+============================================
+
+# Versions
+
+- [TFS-11.1049734.zip](https://raw.githubusercontent.com/osmsnbey/todelete2/main/files/UCB/TFS/TFS-11.1049734.zip)
+- [TFS-9.752927.zip](https://raw.githubusercontent.com/osmsnbey/todelete2/main/files/UCB/TFS/TFS-9.752927.zip)
+- [TFS-8.679324.zip](https://raw.githubusercontent.com/osmsnbey/todelete2/main/files/UCB/TFS/TFS-8.679324.zip)
+- [TFS-7.604315.zip](https://raw.githubusercontent.com/osmsnbey/todelete2/main/files/UCB/TFS/TFS-7.604315.zip)
+- [TFS-6.486073.zip](https://raw.githubusercontent.com/osmsnbey/todelete2/main/files/UCB/TFS/TFS-6.486073.zip)
+- [TFS-5.460931.zip](https://raw.githubusercontent.com/osmsnbey/todelete2/main/files/UCB/TFS/TFS-5.460931.zip)
+- [TFS-4.409496.zip](https://raw.githubusercontent.com/osmsnbey/todelete2/main/files/UCB/TFS/TFS-4.409496.zip)
+
+|Back to ...|||
+| :---: | :---: | :---: |
+|[**List of Plugins**](../../index.md)|[Overview](./overview.md)|[Steps_and_Settings](./steps_and_settings.md)|
